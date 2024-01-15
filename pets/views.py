@@ -74,9 +74,9 @@ class DetailedPetView(APIView):
         else:
             setattr(pet, "group", pet.group)
 
-        if "traits" in req.data:
             traits_data = serializer.validated_data.pop("traits")
-            traits = []
+            if "traits" in req.data:
+                traits = []
             for trait_data in traits_data:
                 try:
                     trait = Trait.objects.get(name__iexact=trait_data["name"])
